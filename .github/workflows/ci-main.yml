@@ -2,9 +2,10 @@ name: Feature Branch
 
 on:
   push:
-    'main;
-jobs:
+    branches:
+      - 'main;
 
+jobs:
   test:
     name: Unit Test
     runs-on: ubuntu-18.04
