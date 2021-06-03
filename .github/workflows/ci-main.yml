@@ -3,8 +3,7 @@ name: Feature Branch
 on:
   push:
     branches:
-      - 'master'
-      - 'release*'
+      - 'main'
 
 jobs:
 
