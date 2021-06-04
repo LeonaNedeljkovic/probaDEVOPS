@@ -51,6 +51,8 @@ jobs:
  sonar:
     name: Build
     runs-on: ubuntu-latest
+    strategy:
+      matrix: { dir: ['agent-user-service', 'product-service'] }
     steps:
       - uses: actions/checkout@v2
         with:
@@ -72,18 +74,18 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build and analyze
-        working-directory: agent-user-service
+        working-directory: ${{ matrix.dir }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dspring.profiles.active=test -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
-      - name: Build and analyze product-service
-        working-directory: product-service
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dspring.profiles.active=test -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+#       - name: Build and analyze product-service
+#         working-directory: product-service
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dspring.profiles.active=test -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
           
           
 #  sonarcloud:
