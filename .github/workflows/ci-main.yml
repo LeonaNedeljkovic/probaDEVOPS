@@ -22,7 +22,7 @@ jobs:
         run: mvn -B clean package -DskipTests
       - name: Maven Verify
         working-directory: agent-user-service
-        run: mvn -B clean verify
+        run: mvn -B clean verify -Dspring.profiles.active=test
 
 
       - name: Publish - GitHub Packages
