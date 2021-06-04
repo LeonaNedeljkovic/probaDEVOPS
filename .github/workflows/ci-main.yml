@@ -22,7 +22,7 @@ jobs:
         run: mvn -B clean package -DskipTests
       - name: Maven Verify
         working-directory: agent-user-service
-        run: mvn -B clean verify -Dspring.profiles.active=test
+        run: mvn -B clean verify -Dspring.profiles.active=test -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
 
       - name: Publish - GitHub Packages
