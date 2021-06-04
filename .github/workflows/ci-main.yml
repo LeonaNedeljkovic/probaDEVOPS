@@ -84,7 +84,7 @@ jobs:
       - name: Sleep for 5 seconds
         uses: jakejarvis/wait-action@master
         with:
-          time: '5s'
+          time: '15s'
       
       - name: Build and analyze product-service
         working-directory: product-service
