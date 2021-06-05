@@ -51,8 +51,6 @@ jobs:
  sonar1:
     name: Build
     runs-on: ubuntu-latest
-    strategy:
-      matrix: { dir: ['agent-user-service', 'product-service'] }
     steps:
       - uses: actions/checkout@v2
         with:
