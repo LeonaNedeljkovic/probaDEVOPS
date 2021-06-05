@@ -11,6 +11,8 @@ jobs:
  test:
     name: Unit Test
     runs-on: ubuntu-18.04
+    strategy:
+      matrix: { dir: ['product-service', 'agent-user-service','shopping-service'] }
 
     steps:
       - uses: actions/checkout@v2
@@ -44,16 +46,11 @@ jobs:
           prerelease: true
         
       - name: Publish - GitHub Packages agent
-        working-directory: agent-user-service
+        working-directory: ${{ matrix.dir }}
         run: mvn -B clean deploy -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
           
-      - name: Publish - GitHub Packages
-        working-directory:  product-service
-        run: mvn -B clean deploy -DskipTests
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
 
 #  analyze_agent_user_service:
 #     name: Build
