@@ -86,7 +86,7 @@ jobs:
     steps:  
       - uses: jakejarvis/wait-action@master
         with:
-          time: '30s'
+          time: '10s'
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
@@ -120,7 +120,7 @@ jobs:
     steps:  
       - uses: jakejarvis/wait-action@master
         with:
-          time: '60s'
+          time: '10s'
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
