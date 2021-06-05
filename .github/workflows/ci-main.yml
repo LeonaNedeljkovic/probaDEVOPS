@@ -81,6 +81,7 @@ jobs:
 
 
  analyze_product_service:
+    needs: analyze_agent_user_service
     runs-on: ubuntu-latest
     steps:  
       - uses: jakejarvis/wait-action@master
@@ -114,6 +115,7 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dspring.profiles.active=test -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
  analyze_shopping_service:
+    needs: analyze_product_service:
     runs-on: ubuntu-latest
     steps:  
       - uses: jakejarvis/wait-action@master
