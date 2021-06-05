@@ -2,9 +2,9 @@ name: Feature Branch
 
 on:
   push:
+  pull_request:
     branches:
-      - 'main'
-
+      - develop
 jobs:
 
  test:
@@ -25,11 +25,11 @@ jobs:
         run: mvn -B clean verify -Dspring.profiles.active=test -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
 
-      - name: Publish - GitHub Packages
-        working-directory: agent-user-service
-        run: mvn -B clean deploy -DskipTests
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       - name: Publish - GitHub Packages
+#         working-directory: agent-user-service
+#         run: mvn -B clean deploy -DskipTests
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Bump version and push tag
         id: tag_version
