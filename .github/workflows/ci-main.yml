@@ -84,13 +84,14 @@ jobs:
       - name: Sleep for 5 seconds
         uses: jakejarvis/wait-action@master
         with:
-          time: '15s'
-          name: Build and analyze product-service
-          working-directory: product-service
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dspring.profiles.active=test -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+          time: '30s'
+      
+      - name: Build and analyze product-service
+        working-directory: product-service
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dspring.profiles.active=test -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
       
       
           
